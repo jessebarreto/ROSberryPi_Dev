@@ -5,6 +5,8 @@ Installing the ROS on Raspberry Pi 3 and Raspberry Pi 2 B
 #Installing ROS on Raspbian Jessie with kernel 4.1.9   
 
 Following this tutorial: http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Indigo%20on%20Raspberry%20Pi   
+
+We are following the instructions to install a ROS_comm.
    
 Using the follow commands to setup the repositories   
    
@@ -40,7 +42,8 @@ $ sudo apt-get install checkinstall cmake
 $ sudo sh -c 'echo "deb-src http://mirrordirector.raspbian.org/raspbian/ testing main contrib non-free rpi" >> /etc/apt/sources.list'   
 $ sudo apt-get update   
 
-$ cd ~/ros_catkin_ws/external_src   
+Collada-Dom   
+$ cd ~/catkin_ws/external_src      
 $ sudo apt-get install libboost-filesystem-dev libxml2-dev   
 $ wget http://downloads.sourceforge.net/project/collada-dom/Collada%20DOM/Collada%20DOM%202.4/collada-dom-2.4.0.tgz   
 $ tar -xzf collada-dom-2.4.0.tgz   
@@ -48,4 +51,13 @@ $ cd collada-dom-2.4.0
 $ cmake .   
 $ sudo checkinstall make install   
 
+DO NOT FORGET TO CHANGE THE NAME OF THE PACKAGE TO collada-dom-dev   
+
+EU PAREI AQUI
+
+libconsole-bridge-dev
+$ cd ~/catkin_ws/external_src
+$ sudo apt-get build-dep console-bridge
+$ apt-get source -b console-bridge
+$ sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev_*.deb
 
