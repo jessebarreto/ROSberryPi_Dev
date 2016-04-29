@@ -54,13 +54,13 @@ $ sudo checkinstall make install
 
 
 libconsole-bridge-dev
-(MAKE SURE your /etc/apt/soource.list line isnt commented)
+(MAKE SURE your /etc/apt/source.list line isnt commented)
 $ cd ~/catkin_ws/external_src
 $ sudo apt-get build-dep console-bridge
 $ apt-get source -b console-bridge
 $ sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev_*.deb
 
-
-$ cd ~/ros_catkin_ws/external_src
+liblz4-dev
+$ cd ~/catkin_ws/external_src
 $ apt-get source -b lz4
 $ sudo dpkg -i liblz4-*.deb
