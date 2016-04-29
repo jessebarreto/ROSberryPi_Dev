@@ -64,3 +64,9 @@ liblz4-dev
 $ cd ~/catkin_ws/external_src
 $ apt-get source -b lz4
 $ sudo dpkg -i liblz4-*.deb
+
+Resolving dependencies with rosdep
+
+$ cd ~/catkin_ws
+$ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
+
