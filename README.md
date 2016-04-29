@@ -43,6 +43,7 @@ $ sudo sh -c 'echo "deb-src http://mirrordirector.raspbian.org/raspbian/ testing
 $ sudo apt-get update   
 
 Collada-Dom   
+(DO NOT FORGET TO CHANGE THE NAME OF THE PACKAGE TO collada-dom-dev)
 $ cd ~/catkin_ws/external_src      
 $ sudo apt-get install libboost-filesystem-dev libxml2-dev   
 $ wget http://downloads.sourceforge.net/project/collada-dom/Collada%20DOM/Collada%20DOM%202.4/collada-dom-2.4.0.tgz   
@@ -51,13 +52,15 @@ $ cd collada-dom-2.4.0
 $ cmake .   
 $ sudo checkinstall make install   
 
-DO NOT FORGET TO CHANGE THE NAME OF THE PACKAGE TO collada-dom-dev   
-
-EU PAREI AQUI
 
 libconsole-bridge-dev
+(MAKE SURE your /etc/apt/soource.list line isnt commented)
 $ cd ~/catkin_ws/external_src
 $ sudo apt-get build-dep console-bridge
 $ apt-get source -b console-bridge
 $ sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev_*.deb
 
+
+$ cd ~/ros_catkin_ws/external_src
+$ apt-get source -b lz4
+$ sudo dpkg -i liblz4-*.deb
