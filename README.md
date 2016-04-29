@@ -70,3 +70,38 @@ Resolving dependencies with rosdep
 $ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
 
+Building the catkin Workspace
+
+Invoke catkin_make_isolated  to install ROS in /opt/ros/indigo like in Ubuntu
+
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo -j2
+
+Setting the source of ROS in the bash
+
+$ echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+$ source /opt/ros/indigo/setup.bash
+
+#Now ROS is Installed
+
+To Update the workspace remember to 
+
+Add relesead packages
+$ cd ~/ros_catkin_ws
+$ rosinstall_generator ros_comm ros_control joystick_drivers --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-custom_ros.rosinstall
+
+Update the workspace
+$ wstool merge -t src indigo-custom_ros.rosinstall
+$ wstool update -t src
+
+Use rosdep to solve any new dependencies
+$ rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
+
+With everything up to date rebuild the workspace
+$ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
+
+
+
+
+#NOW ROS is installed!
+
+
