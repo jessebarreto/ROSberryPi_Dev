@@ -119,4 +119,10 @@ Install it's dependencies
 $ sudo apt-get install openssl libssl-dev
 
 $ cd ~/catkin_ws/external_src/
-$ git clone https://github.com/andreasmuller/openframeWorks-Raspberry-PI.git
+$ wget https://github.com/andreasmuller/openframeWorks-Raspberry-PI/raw/master/LIBS/poco-1.4.3p1.tar.gz
+$ gunzip poco-1.4.3p1.tar.gz
+$ cd poco-1.4.3p1
+$ ./configure --omit=Data/ODBC,Data/MySQL
+$ make -s
+$ sudo make -s install
+
