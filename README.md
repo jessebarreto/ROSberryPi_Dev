@@ -86,7 +86,7 @@ $ source /opt/ros/indigo/setup.bash
 To Update the workspace remember to 
 
 Add relesead packages
-$ cd ~/ros_catkin_ws
+$ cd ~/catkin_ws
 $ rosinstall_generator ros_comm ros_control joystick_drivers --rosdistro indigo --deps --wet-only --exclude roslisp --tar > indigo-custom_ros.rosinstall
 
 Update the workspace
@@ -100,8 +100,23 @@ With everything up to date rebuild the workspace
 $ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
 
 
+#NOW ROS is Installed and Up2Date!
 
+#For testing purposes: Install rosserial_embeddedlinux
+(source: http://wiki.ros.org/rosserial_embeddedlinux/Tutorials)
+(source: http://wiki.ros.org/rosserial_embeddedlinux/GenericInstall)
+Install using catkin
+$  cd ~/catkin_ws/src
+$  git clone https://github.com/ros-drivers/rosserial.git
+$  cd ~/catkin_ws/
+$  catkin_make
+$  catkin_make install
+$  source <ws>/install/setup.bash
 
-#NOW ROS is installed!
+**If you find an error about a library called POCO follow this to install POCO C++ Project
 
+Install it's dependencies
+$ sudo apt-get install openssl libssl-dev
 
+$ cd ~/catkin_ws/external_src/
+$ git clone https://github.com/andreasmuller/openframeWorks-Raspberry-PI.git
