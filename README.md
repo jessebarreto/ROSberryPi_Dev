@@ -248,3 +248,42 @@ To download the second image use this link:
 http://www.terasic.com/downloads/cd-rom/sockit/linux_BSP/SoCKit_RevD_LXDE.zip
 
 After the download do the same procedure as before to write the image on the SD card
+
+When booting we checked if this distro is good to go and that was the case!
+
+To check about this distro
+$ uname -a
+Linux localhost.localdomain 3.13.0-00298-g3c7cbb9-dirty #4 SMP Thu Jul 10 15:01:
+13 CST 2014 armv7l armv7l armv7l GNU/Linux 
+
+$ lsb_release -a
+No LSB modules are available.                                                   
+Distributor ID: Linaro                                                          
+Description:    Linaro 13.04                                                    
+Release:        13.04                                                           
+Codename:       quantal  
+
+However, everything seems to be good, this distro is based in an outdate Ubuntu 12.10, a distro that doesn't ahve support anymore, and because of that that's some problems with the repository and with the apt-get.
+
+To change that we started to update the Linaro 13.10 to a Linaro 14.01 and then Ubuntu 14.04. Following this tutorial: 
+http://homecircuits.eu/blog/ubuntu-12-10-to-13-10-and-to-14-04/
+
+Changing the source.list file and add the follow lines on nano
+/#deb http://ports.ubuntu.com/ubuntu-ports/ quantal main universe
+deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu/ quantal-updates main restricted universe multiverse
+deb http://old-releases.ubuntu.com/ubuntu/ quantal-security main restricted universe multiverse
+
+/#deb-src http://ports.ubuntu.com/ubuntu-ports/ quantal main universe
+deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main universe
+
+Now, it's possible to use update
+$ sudo apt-get update
+
+Now let's upgrade some old packages
+$ sudo apt-get upgrade
+
+and finally upgrade the distro
+sudo apt-get dist-upgrade
+
+First of all we realize that this distro is based on a linaro 13.10()
