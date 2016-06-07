@@ -283,7 +283,95 @@ $ sudo apt-get update
 Now let's upgrade some old packages
 $ sudo apt-get upgrade
 
-and finally upgrade the distro
+Now that we can access the distro repository let's install the SSH server to not use the serial communication anymore.
+$ sudo apt-get install ssh
+
+Even though, we can use the ssh command we do not know the user password. So we just need to change it
+$ sudo passwd
+and then type the new password
+in our case 123 and it's done, we now can connect through ssh!
+
+Now to connect through ssh instead of uart on your pc enter the follow commands
+The MAC Address of the FPGA is 12:34:56:78:90:12
+$ ssh root@[FPGA's IP]
+then type the password 123 we just had changed.
+
+Now using SSH we, finally, upgrade the repositories to a new distro installation
 sudo apt-get dist-upgrade
 
-First of all we realize that this distro is based on a linaro 13.10()
+Upgrade Ubuntu 12.10 to Ubuntu 13.10 on Linaro 14.01
+$ sudo apt-get install update-manager-core
+$ sudo apt-get install update-manager
+$ sudo do-release-upgrade
+It will complain because we are installing under ssh. Just accept the use of the sshd on port 1022
+
+Done Now the distro running is Linaro 14.01
+It's possible even to check it through the commands 
+$ uname -a
+$ lsb_release -a
+
+Now it's necessary to update the repositories
+$ nano /etc/apt/sources.list
+and write the follow sources like this
+$ deb http://ports.ubuntu.com/ubuntu-ports/ trusty main restricted universe multiverse
+
+Then we need to upgrade the distro
+$ sudo do-release-upgrade
+
+#3 LONG HOURS LATER Ubuntu 14.04 is finally INSTALLED
+
+To check if everything went fine with the ubuntu installation with
+$ lsb_resease -a
+
+If everything was A-Ok you will see the follow message
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 14.04 LTS
+Release:        14.04
+Codename:       trusty
+
+Also update and upgrade the repositories and libs
+$ sudo apt-get update
+$ sudo apt-get upgrade
+
+Because of the ssh problem with root without password. First we need to crate a user with root privileges
+$ useradd -ou 0 -g 0 jesseh
+
+To check if everything went fine
+$ cat /etc/passwd | grep jesseh
+
+Now it's possible to connect through ssh using the new user
+
+Do not forget, just in case, to configure in /etc/ssh/sshd_config to allow root login and login without password
+ 
+
+#Installing ROS on the SOC FPGA
+
+Now we just need to follow this steps
+http://wiki.ros.org/indigo/Installation/UbuntuARM
+
+First set the locale because of some of ROS depedencies need it
+
+$ sudo update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
+
+Add the ros-indigo in the repositories list
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
+$ sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 0xB01FA116
+If this command doesn't work use this command
+$ sudo gpg --ignore-time-conflict --no-options --no-default-keyring --secret-keyring /etc/apt/secring.gpg --trustdb-name /etc/apt/trustdb.gpg --keyring /etc/apt/trusted.gpg --primary-keyring /etc/apt/trusted.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv A258828C
+
+Then
+$ sudo apt-get update
+
+Initially let's install ROS-Bare bones and if we need to install more libraries, we can do so manually
+$ sudo apt-get install ros-indigo-ros-base
+
+Initializing rosdep
+$ sudo apt-get install python-rosdep
+$ sudo rosdep init
+$ rosdep update
+
+Setup the bash
+$ echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+$ source ~/.bashrc
+
